@@ -166,7 +166,7 @@ def steam_callback():
         return error_redirect("steam_invalid_response")
     fields = {k: v[0] for k, v in vals.items() if k.startswith("openid.")}
     claimed = fields.get("openid.claimed_id", "")
-    match = re.fullmatch(r"https?://steamcommunity\\.com/openid/id/([0-9]{17})", claimed)
+    match = re.fullmatch(r"https?://steamcommunity\.com/openid/id/([0-9]{17})", claimed)
     signed = set(fields.get("openid.signed", "").split(","))
     required = {"claimed_id", "identity", "return_to", "response_nonce", "assoc_handle", "op_endpoint"}
     expected_url = PUBLIC_BASE_URL + "/auth/steam/callback?state=" + request.args["state"]
